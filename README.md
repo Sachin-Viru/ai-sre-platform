@@ -1934,10 +1934,6 @@ curl http://localhost:9100/metrics
 
 ![AI-SRE Rocket.Chat Incident](./screenshots/02-rocketchat-ai-incident.png)
 
-### Prometheus Alerts
-
-```text
-Add your Prometheus screenshot here:
 
 screenshots/prometheus-alerts.png
 ```
