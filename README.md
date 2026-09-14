@@ -1935,13 +1935,6 @@ curl http://localhost:9100/metrics
 ![AI-SRE Rocket.Chat Incident](./screenshots/02-rocketchat-ai-incident.png)
 
 
-
-```text
-Add your Loki screenshot here:
-
-screenshots/loki-logs.png
-```
-
 ---
 
 ## 🎯 Project Goals
