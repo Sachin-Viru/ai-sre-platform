@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: mongorocket
+    restart: unless-stopped
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - monitoring
+
+  mongo-init:
+    image: mongo:7.0
+    container_name: mongo-init
+    depends_on:
+      - mongo
+    restart: "no"
+    networks:
+      - monitoring
+    entrypoint: >
+      bash -c "
+      sleep 5 &&
+      mongosh --host mongo:27017 --eval '
+      try {
+        rs.status()
+      } catch (e) {
+        rs.initiate({
+          _id: \"rs0\",
+          members: [{ _id: 0, host: \"mongo:27017\" }]
+        })
+      }'
+      "
+
+  rocketchat:
+    image: registry.rocket.chat/rocketchat/rocket.chat:8.4.0
+    container_name: rockerchat
+    restart: unless-stopped
+    ports:
+      - "4000:3000"
+    environment:
+      - ROOT_URL=http://localhost:4000
+      - PORT=3000
+
+      # MongoDB (IMPORTANT: replica set enabled)
+      - MONGO_URL=mongodb://mongo:27017/rocketchat?replicaSet=rs0
+      - MONGO_OPLOG_URL=mongodb://mongo:27017/local?replicaSet=rs0
+
+      # Fix your previous issues
+      - DEPLOY_METHOD=docker
+      - CLOUD_WORKSPACE_REGISTER=false
+      - OVERWRITE_SETTING_Show_Setup_Wizard=completed
+
+    depends_on:
+      - mongo
+      - mongo-init
+    networks:
+      - monitoring
+
+volumes:
+  mongo-data:
+
+networks:
+  monitoring:
+    external: true
+      #Sachin Sachin@0664@pp
+      #vishwa vishwa@0664@pp      

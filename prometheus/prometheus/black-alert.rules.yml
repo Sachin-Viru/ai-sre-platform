@@ -1,0 +1,21 @@
+groups:
+- name: blackbox-alerts
+  rules:
+
+  - alert: WebsiteDown
+    expr: probe_success == 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Website down"
+      description: "{{ $labels.instance }} is not reachable"
+
+  - alert: WebsiteSlow
+    expr: probe_duration_seconds > 5
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Slow website"
+      description: "{{ $labels.instance }} is slow (>5s)"
