@@ -839,18 +839,6 @@ AI-SRE investigation completed.
 
 ---
 
-## 📸 AI-SRE Rocket.Chat Alert
-
-Add your Rocket.Chat screenshot here:
-
-```text
-screenshots/rocketchat-alert.png
-```
-
-![AI-SRE Rocket.Chat Incident](screenshots/rocketchat-alert.png)
-
-> Replace `screenshots/rocketchat-alert.png` with your own screenshot path if you use a different filename.
-
 ---
 
 ## 🖥️ Node Exporter Custom SRE Metrics
