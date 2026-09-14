@@ -1935,10 +1935,6 @@ curl http://localhost:9100/metrics
 ![AI-SRE Rocket.Chat Incident](./screenshots/02-rocketchat-ai-incident.png)
 
 
-screenshots/prometheus-alerts.png
-```
-
-### Loki Logs
 
 ```text
 Add your Loki screenshot here:
